@@ -2,14 +2,33 @@
 
 namespace GradeBook
 {
-    class Program
+    class Program 
     {
         static void Main(string[] args)
         {
             Book book = new Book("Moses' Grade Book");
-            book.AddGrade(78);
-            book.AddGrade(85);
-            book.AddGrade(65);
+            
+            while(true) {
+                Console.WriteLine("Please enter a grade, enter 'Q' to quit");
+                var grade = Console.ReadLine();
+                if (grade == "Q") {
+                    break;
+                } else {
+                    try
+                    {
+                        book.AddGrade(double.Parse(grade));
+                    }
+                    catch (InvalidGradeException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    catch (FormatException ex) {
+                        Console.WriteLine(ex.Message);
+                    }
+                    
+                }
+            }
+
             book.ShowStatistics();
         }
     }
